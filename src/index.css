@@ -109,6 +109,14 @@ legend {
   padding: 0;
 }
 
+a {
+  color: rgb(18, 110, 248);
+  text-decoration: none;
+}
+a:hover {
+  color: rgb(12, 90, 207);
+  text-decoration: none;
+}
 /**
    * Remove trailing margins from nested lists.
    */
@@ -185,33 +193,6 @@ h5 {
 
 h6 {
   font-size: 13px;
-}
-
-/* ==========================================================================
-     #BACKGROUND
-     ========================================================================== */
-.bg-blue {
-  background: #2c6ed5;
-}
-
-.bg-red {
-  background: #fa4251;
-}
-
-.bg-gra-01 {
-  background: -webkit-gradient(linear, left bottom, left top, from(#fbc2eb), to(#a18cd1));
-  background: -webkit-linear-gradient(bottom, #fbc2eb 0%, #a18cd1 100%);
-  background: -moz-linear-gradient(bottom, #fbc2eb 0%, #a18cd1 100%);
-  background: -o-linear-gradient(bottom, #fbc2eb 0%, #a18cd1 100%);
-  background: linear-gradient(to top, #fbc2eb 0%, #a18cd1 100%);
-}
-
-.bg-gra-02 {
-  background: -webkit-gradient(linear, left bottom, right top, from(#fc2c77), to(#6c4079));
-  background: -webkit-linear-gradient(bottom left, #fc2c77 0%, #6c4079 100%);
-  background: -moz-linear-gradient(bottom left, #fc2c77 0%, #6c4079 100%);
-  background: -o-linear-gradient(bottom left, #fc2c77 0%, #6c4079 100%);
-  background: linear-gradient(to top right, #fc2c77 0%, #6c4079 100%);
 }
 
 /* ==========================================================================
@@ -323,6 +304,13 @@ h6 {
   background: #3868cd;
 }
 
+.btn--red {
+  background: #e63946;
+}
+.btn--red:hover {
+  background: #e76f51;
+}
+
 /* ==========================================================================
      #DATE PICKER
      ========================================================================== */
@@ -340,6 +328,10 @@ td.active {
 /* ==========================================================================
      #FORM
      ========================================================================== */
+
+.text-center {
+  text-align: center;
+}
 input {
   outline: none;
   margin: 0;
@@ -445,7 +437,7 @@ input {
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   border-radius: 50%;
-  background: #57b846;
+  background: #e63946;
 }
 
 .checkmark {
