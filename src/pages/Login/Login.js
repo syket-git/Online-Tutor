@@ -8,20 +8,30 @@ const Login = () => {
   const onSubmit = (data) => {
     console.log(data);
   };
+
+  const url = window.location.href;
+  let sendUrl;
+
+  if (url.endsWith('student') === true) {
+    sendUrl = '/register/student';
+  } else {
+    sendUrl = '/register/tutor';
+  }
+
   return (
     <div className="auth-wrapper">
-      <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
-        <div class="wrapper wrapper--w680">
-          <div class="card card-4">
-            <div class="card-body">
-              <h2 class="title text-center">Login Form</h2>
+      <div className="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <div className="wrapper wrapper--w680">
+          <div className="card card-4">
+            <div className="card-body">
+              <h2 className="title text-center">Login Form</h2>
               <form onSubmit={handleSubmit(onSubmit)}>
-                <div class="row row-space">
-                  <div class="col-2">
-                    <div class="input-group">
-                      <label class="label">Email</label>
+                <div className="row row-space">
+                  <div className="col-md-6">
+                    <div className="input-group">
+                      <label className="label">Email</label>
                       <input
-                        class="input--style-4"
+                        className="input--style-4"
                         ref={register({ required: true })}
                         type="email"
                         name="email"
@@ -31,11 +41,11 @@ const Login = () => {
                       )}
                     </div>
                   </div>
-                  <div class="col-2">
-                    <div class="input-group">
-                      <label class="label">Password</label>
+                  <div className="col-md-6">
+                    <div className="input-group">
+                      <label className="label">Password</label>
                       <input
-                        class="input--style-4"
+                        className="input--style-4"
                         ref={register({ required: true })}
                         type="password"
                         name="password"
@@ -47,13 +57,13 @@ const Login = () => {
                   </div>
                 </div>
 
-                <div class="p-t-15 text-center">
-                  <button class="btn btn--radius-2 btn--red" type="submit">
+                <div className="p-t-15 text-center">
+                  <button className="btn btn--radius-2 btn--red" type="submit">
                     Submit
                   </button>
                   <p className="p-t-10">
                     Don't have an account?{' '}
-                    <Link to="/registration">Registration</Link>
+                    <Link to={sendUrl}>Registration</Link>
                   </p>
                 </div>
               </form>

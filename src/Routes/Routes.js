@@ -4,19 +4,31 @@ import Home from '../pages/Home/Home';
 import Registration from '../pages/Registration/Registration';
 import Login from '../pages/Login/Login';
 import NotFound from '../pages/404/404';
+import Navbar from '../components/Navbar/Navbar';
 
 const Routes = () => {
   return (
     <div>
       <Router>
+        <Navbar />
         <Switch>
           <Route exact path="/">
             <Home />
           </Route>
-          <Route exact path="/registration">
+          <Route exact path="/register/student">
             <Registration />
           </Route>
-          <Route exact path="/login">
+          <Route exact path="/register/tutor">
+            <Registration />
+          </Route>
+
+          <Route exact path="/login/student">
+            <Login />
+          </Route>
+          <Route exact path="/login/tutor">
+            <Login />
+          </Route>
+          <Route exact path="/login/admin">
             <Login />
           </Route>
           <Route path="*">

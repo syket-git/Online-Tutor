@@ -8,20 +8,30 @@ const Registration = () => {
   const onSubmit = (data) => {
     console.log(data);
   };
+
+  const url = window.location.href;
+  let sendUrl;
+
+  if (url.endsWith('student') === true) {
+    sendUrl = '/login/student';
+  } else {
+    sendUrl = '/login/tutor';
+  }
+
   return (
     <div className="auth-wrapper">
-      <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
-        <div class="wrapper wrapper--w680">
-          <div class="card card-4">
-            <div class="card-body">
-              <h2 class="title text-center">Registration Form</h2>
+      <div className="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <div className="wrapper wrapper--w680">
+          <div className="card card-4">
+            <div className="card-body">
+              <h2 className="title text-center">Registration Form</h2>
               <form onSubmit={handleSubmit(onSubmit)}>
-                <div class="row row-space">
-                  <div class="col-2">
-                    <div class="input-group">
-                      <label class="label">first name</label>
+                <div className="row row-space">
+                  <div className="col-md-6">
+                    <div className="input-group">
+                      <label className="label">first name</label>
                       <input
-                        class="input--style-4"
+                        className="input--style-4"
                         ref={register({ required: true })}
                         type="text"
                         name="firstName"
@@ -31,11 +41,11 @@ const Registration = () => {
                       )}
                     </div>
                   </div>
-                  <div class="col-2">
-                    <div class="input-group">
-                      <label class="label">last name</label>
+                  <div className="col-md-6">
+                    <div className="input-group">
+                      <label className="label">last name</label>
                       <input
-                        class="input--style-4"
+                        className="input--style-4"
                         ref={register({ required: true })}
                         type="text"
                         name="latName"
@@ -47,12 +57,12 @@ const Registration = () => {
                   </div>
                 </div>
 
-                <div class="row row-space">
-                  <div class="col-2">
-                    <div class="input-group">
-                      <label class="label">Email</label>
+                <div className="row row-space">
+                  <div className="col-md-6">
+                    <div className="input-group">
+                      <label className="label">Email</label>
                       <input
-                        class="input--style-4"
+                        className="input--style-4"
                         ref={register({ required: true })}
                         type="email"
                         name="email"
@@ -62,11 +72,11 @@ const Registration = () => {
                       )}
                     </div>
                   </div>
-                  <div class="col-2">
-                    <div class="input-group">
-                      <label class="label">Phone Number</label>
+                  <div className="col-md-6">
+                    <div className="input-group">
+                      <label className="label">Phone Number</label>
                       <input
-                        class="input--style-4"
+                        className="input--style-4"
                         ref={register({ required: true })}
                         type="text"
                         name="phone"
@@ -77,12 +87,12 @@ const Registration = () => {
                     </div>
                   </div>
                 </div>
-                <div class="row row-space">
-                  <div class="col-2">
-                    <div class="input-group">
-                      <label class="label">Password</label>
+                <div className="row row-space">
+                  <div className="col-md-6">
+                    <div className="input-group">
+                      <label className="label">Password</label>
                       <input
-                        class="input--style-4"
+                        className="input--style-4"
                         ref={register({ required: true })}
                         type="password"
                         name="password"
@@ -93,22 +103,21 @@ const Registration = () => {
                     </div>
                   </div>
 
-                  <div class="col-2">
-                    <div class="input-group">
-                      <label class="label">Gender</label>
-                      <div class="p-t-10">
-                        <label class="radio-container m-r-45">
+                  <div className="col-md-6">
+                    <div className="input-group">
+                      <label className="label">Gender</label>
+                      <div className="p-t-10">
+                        <label className="radio-container m-r-45">
                           Male
                           <input
                             type="radio"
                             ref={register({ required: true })}
-                            checked="checked"
                             name="gender"
                             value="male"
                           />
-                          <span class="checkmark"></span>
+                          <span className="checkmark"></span>
                         </label>
-                        <label class="radio-container">
+                        <label className="radio-container">
                           Female
                           <input
                             type="radio"
@@ -116,7 +125,7 @@ const Registration = () => {
                             name="gender"
                             value="female"
                           />
-                          <span class="checkmark"></span>
+                          <span className="checkmark"></span>
                         </label>
                         {errors.gender && (
                           <p className="error">Gender is required.</p>
@@ -125,12 +134,12 @@ const Registration = () => {
                     </div>
                   </div>
                 </div>
-                <div class="p-t-15 text-center">
-                  <button class="btn btn--radius-2 btn--red" type="submit">
+                <div className="p-t-15 text-center">
+                  <button className="btn btn--radius-2 btn--red" type="submit">
                     Submit
                   </button>
                   <p className="p-t-10">
-                    Already have an account? <Link to="/login">Login</Link>
+                    Already have an account? <Link to={sendUrl}>Login</Link>
                   </p>
                 </div>
               </form>
