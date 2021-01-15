@@ -28,7 +28,7 @@ router.post('/student/register', async (req, res) => {
     if (existEmail) return res.status(409).json('Email already exist');
 
     await Signup.save();
-    res.json('Sign up successfully completed');
+    res.json({ status: true, message: 'Register successfully done' });
   } catch (error) {
     res.status(400).json({ message: error?.message });
   }
@@ -56,7 +56,7 @@ router.post('/tutor/register', async (req, res) => {
     if (existEmail) return res.status(409).json('Email already exist');
 
     await Signup.save();
-    res.json('Sign up successfully created');
+    res.json({ status: true, message: 'Register successfully done' });
   } catch (error) {
     res.status(400).json({ message: error?.message });
   }
@@ -75,7 +75,17 @@ router.post('/student/login', async (req, res) => {
     if (!validPass) return res.status(400).json('Invalid email or password');
 
     const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-    res.header('auth-token', token).send(token);
+    res.header('auth-token', token).send({
+      success: true,
+      message: 'Login successfully done',
+      data: {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        phone: user.phone,
+        token: token,
+      },
+    });
   } catch (error) {
     res.status(400).json({ message: error?.message });
   }
@@ -94,7 +104,17 @@ router.post('/tutor/login', async (req, res) => {
     if (!validPass) return res.status(400).json('Invalid email or password');
 
     const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-    res.header('auth-token', token).send(token);
+    res.header('auth-token', token).send({
+      success: true,
+      message: 'Login successfully done',
+      data: {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        phone: user.phone,
+        token: token,
+      },
+    });
   } catch (error) {
     res.status(400).json({ message: error?.message });
   }

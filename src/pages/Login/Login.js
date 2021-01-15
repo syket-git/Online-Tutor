@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
 import { studentLogin, tutorLogin } from '../../actions/auth';
 
 const Login = ({ studentLogin, tutorLogin }) => {
@@ -14,7 +13,7 @@ const Login = ({ studentLogin, tutorLogin }) => {
 
     if (url.endsWith('student') === true) {
       studentLogin(data);
-    } else if (url.endsWith('student') === true) {
+    } else if (url.endsWith('tutor') === true) {
       tutorLogin(data);
     }
     window.scrollTo(0, 0);

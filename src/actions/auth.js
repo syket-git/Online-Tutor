@@ -37,10 +37,10 @@ export const studentRegister = ({
       config
     );
 
-    dispatch(setAlert(res.data, 'success'));
-    if (res) {
-      return <Redirect to="/login/student" />;
-    }
+    console.log(res.data);
+
+    dispatch(setAlert(res.data.message, 'success'));
+    window.location.replace('/login/student');
   } catch (err) {
     const errors = err?.response?.data;
     if (errors) {
@@ -55,7 +55,6 @@ export const studentRegister = ({
 // Student Login
 
 export const studentLogin = ({ email, password }) => async (dispatch) => {
-  const history = useHistory();
   //console.log({ email, password });
   const config = {
     headers: {
@@ -69,14 +68,13 @@ export const studentLogin = ({ email, password }) => async (dispatch) => {
       body,
       config
     );
-    //console.log(res.data.data);
 
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data.data,
     });
-    dispatch(setAlert(res.data, 'success'));
-    history.push('/update-profile/student');
+    dispatch(setAlert(res.data.message, 'success'));
+    window.location.replace('/update-profile/student');
     // dispatch(loadUser());
   } catch (err) {
     const errors = err?.response?.data;
@@ -92,7 +90,6 @@ export const studentLogin = ({ email, password }) => async (dispatch) => {
 // Tutor Login
 
 export const tutorLogin = ({ email, password }) => async (dispatch) => {
-  const history = useHistory();
   //console.log({ email, password });
   const config = {
     headers: {
@@ -101,19 +98,14 @@ export const tutorLogin = ({ email, password }) => async (dispatch) => {
   };
   const body = JSON.stringify({ email, password });
   try {
-    const res = await axios.post(
-      `${BASE_URL}/auth/student/login`,
-      body,
-      config
-    );
-    //console.log(res.data.data);
+    const res = await axios.post(`${BASE_URL}/auth/tutor/login`, body, config);
 
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data.data,
     });
-    dispatch(setAlert(res.data, 'success'));
-    history.push('/update-profile/tutor');
+    dispatch(setAlert(res.data.message, 'success'));
+    window.location.replace('/update-profile/tutor');
     // dispatch(loadUser());
   } catch (err) {
     const errors = err?.response?.data;
@@ -157,10 +149,8 @@ export const tutorRegister = ({
       config
     );
 
-    dispatch(setAlert(res.data, 'success'));
-    if (res) {
-      return <Redirect to="/tutor/student" />;
-    }
+    dispatch(setAlert(res.data.message, 'success'));
+    window.location.replace('/login/tutor');
   } catch (err) {
     const errors = err?.response?.data;
     if (errors) {
