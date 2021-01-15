@@ -1,8 +1,6 @@
-export const STUDENT_REGISTER = 'STUDENT_REGISTER';
-export const TUTOR_REGISTER = 'TUTOR_REGISTER';
 export const STUDENT_LOGIN = 'STUDENT_LOGIN';
 export const TUTOR_LOGIN = 'TUTOR_LOGIN';
-export const ADMIN_LOGIN = 'ADMIN_LOGIN';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const REGISTER_FAIL = 'REGISTER_FAIL';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const AUTH_ERROR = 'AUTH_ERROR';
