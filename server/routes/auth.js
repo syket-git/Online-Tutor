@@ -27,8 +27,8 @@ router.post('/student/register', async (req, res) => {
     const existEmail = await StudentRegister.findOne({ email: req.body.email });
     if (existEmail) return res.status(409).json('Email already exist');
 
-    const SavedUser = await Signup.save();
-    res.json(SavedUser);
+    await Signup.save();
+    res.json('Sign up successfully completed');
   } catch (error) {
     res.status(400).json({ message: error?.message });
   }
@@ -55,8 +55,8 @@ router.post('/tutor/register', async (req, res) => {
     const existEmail = await TutorRegister.findOne({ email: req.body.email });
     if (existEmail) return res.status(409).json('Email already exist');
 
-    const SavedUser = await Signup.save();
-    res.json(SavedUser);
+    await Signup.save();
+    res.json('Sign up successfully created');
   } catch (error) {
     res.status(400).json({ message: error?.message });
   }

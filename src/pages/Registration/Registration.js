@@ -1,16 +1,27 @@
 import React from 'react';
 import './Registration.css';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
+import { studentRegister, tutorRegister } from '../../actions/auth';
 
-const Registration = () => {
-  const { register, handleSubmit, errors } = useForm(); // initialize the hook
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+const Registration = ({ studentRegister, tutorRegister }) => {
+  const { register, handleSubmit, errors } = useForm();
 
   const url = window.location.href;
   let sendUrl;
+
+  const onSubmit = (data) => {
+    console.log(data);
+
+    if (url.endsWith('student') === true) {
+      studentRegister(data);
+    } else if (url.endsWith('tutor') === true) {
+      tutorRegister(data);
+    }
+    window.scrollTo(0, 0);
+  };
 
   if (url.endsWith('student') === true) {
     sendUrl = '/login/student';
@@ -48,9 +59,9 @@ const Registration = () => {
                         className="input--style-4"
                         ref={register({ required: true })}
                         type="text"
-                        name="latName"
+                        name="lastName"
                       />
-                      {errors.latName && (
+                      {errors.lastName && (
                         <p className="error">Last name is required.</p>
                       )}
                     </div>
@@ -151,4 +162,16 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+Registration.protoType = {
+  studentRegister: PropTypes.func.isRequired,
+  tutorRegister: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
+};
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { studentRegister, tutorRegister })(
+  Registration
+);

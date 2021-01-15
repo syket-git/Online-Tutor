@@ -1,4 +1,6 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 const mongoose = require('mongoose');
 
 require('dotenv').config();
@@ -10,6 +12,9 @@ const authRouter = require('./routes/auth');
 
 //Middleware
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cors());
 app.use('/public', express.static('./public/uploads'));
 
 app.use('/api/auth', authRouter);

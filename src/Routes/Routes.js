@@ -5,12 +5,14 @@ import Registration from '../pages/Registration/Registration';
 import Login from '../pages/Login/Login';
 import NotFound from '../pages/404/404';
 import Navbar from '../components/Navbar/Navbar';
+import Alert from '../components/Alert/Alert';
 
 const Routes = () => {
   return (
     <div>
       <Router>
         <Navbar />
+        <Alert />
         <Switch>
           <Route exact path="/">
             <Home />
