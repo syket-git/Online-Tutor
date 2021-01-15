@@ -53,3 +53,26 @@
 .special {
     padding: 10px 20px;
 }
+
+.padding-left-0 {
+    padding-left: 0 !important;
+}
+.padding-right-0 {
+    padding-right: 0 !important;
+}
+.select {
+    border: none;
+    padding: 4px 24px;
+    width: 100%;
+}
+.select:focus {
+    outline: none !important;
+}
+.ssc {
+    width: 100%;
+    padding: 10px 0px;
+}
+
+.result {
+    height: 40px !important;
+}

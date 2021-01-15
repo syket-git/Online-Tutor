@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import EditIcon from '@material-ui/icons/Edit';
 import { useForm } from 'react-hook-form';
-import ProfileImage from '../../images/ProfileImage.png';
 import './TutorUpdateProfile.css';
-
+import ProfileImage from './ProfileImage';
+import SSC from './SSC';
+import HSC from './HSC';
+import Graduation from './Graduation';
+import Master from './Master';
 const TutorUpdateProfile = () => {
-  const [image, setImage] = useState('');
-
-  const { register, handleSubmit, errors } = useForm();
+  const { handleSubmit } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
@@ -21,32 +21,17 @@ const TutorUpdateProfile = () => {
             <div className="card-body">
               <h2 className="title text-center">Update Profile</h2>
               <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="row row-space">
-                  <div className="update__profile-image-wrapper">
-                    <div className="profile__image">
-                      <img src={ProfileImage} alt="Profile" />
-
-                      <div className="edit-box">
-                        <label htmlFor="image">
-                          <EditIcon className="image-edit" />
-                        </label>
-                        <input
-                          className="file-input"
-                          type="file"
-                          name="image"
-                          id="image"
-                          onChange={(e) => setImage(e.target.files[0])}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <ProfileImage />
+                <SSC />
+                <HSC />
+                <Graduation />
+                <Master />
 
                 <div className="row row-space">
                   <div className="input-group">
                     <label className="label">Speciality</label>
                     <input
-                      className="input--style-4 special"
+                      className="input--style-4"
                       type="text"
                       name="firstName"
                     />
