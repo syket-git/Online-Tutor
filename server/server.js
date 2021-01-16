@@ -9,6 +9,7 @@ const app = express();
 
 //Routes
 const authRouter = require('./routes/auth');
+const educationRoute = require('./routes/education');
 
 //Middleware
 app.use(express.json());
@@ -18,6 +19,7 @@ app.use(cors());
 app.use('/public', express.static('./public/uploads'));
 
 app.use('/api/auth', authRouter);
+app.use('/api/education', educationRoute);
 
 //DB Connection
 mongoose.connect(
