@@ -5,6 +5,28 @@ const TutorRegister = require('../models/auth/TutorRegister');
 const { signupValidation, signinValidation } = require('../validation');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const verify = require('../verify');
+
+router.post('/', async (req, res) => {
+  try {
+    if (req.body.token && req.body.people) {
+      const user = jwt.verify(req.body.token, process.env.TOKEN_SECRET);
+      const { _id } = user;
+      if (req.body.people === 'student') {
+        const user = await StudentRegister.findById(_id).select('-password');
+        if (!user) return res.status(404).json('User not found');
+        res.status(200).json(user);
+      } else if (req.body.people === 'tutor') {
+        const user = await TutorRegister.findById(_id).select('-password');
+        if (!user) return res.status(404).json('User not found');
+        res.status(200).json(user);
+      }
+    }
+    res.status(400).json('Access Denied');
+  } catch (err) {
+    res.status(500).json({ err: 'Internal Server Error' });
+  }
+});
 
 //Student Register
 router.post('/student/register', async (req, res) => {

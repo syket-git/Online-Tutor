@@ -4,21 +4,28 @@ import {
   LOGIN_FAIL,
   AUTH_ERROR,
   LOG_OUT,
+  USER_LOADED,
 } from '../actions/types';
-import Cookies from 'js-cookie';
 
 const initialState = {
   token: null,
   isAuthenticated: false,
   loading: true,
+  user: null,
 };
 
 export const authReducer = (state = initialState, action) => {
   const { type, payload } = action;
   //console.log(payload);
   switch (type) {
+    case USER_LOADED:
+      return {
+        ...state,
+        isAuthenticated: true,
+        loading: false,
+        user: payload,
+      };
     case LOGIN_SUCCESS:
-      Cookies.set('userData', payload, { expires: 1 });
       return {
         ...state,
         ...payload,
@@ -30,7 +37,6 @@ export const authReducer = (state = initialState, action) => {
     case AUTH_ERROR:
     case LOGIN_FAIL:
     case LOG_OUT:
-      Cookies.remove('userData');
       return {
         ...state,
         token: null,

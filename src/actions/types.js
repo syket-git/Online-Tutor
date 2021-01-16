@@ -1,3 +1,4 @@
+export const USER_LOADED = 'USER_LOADED';
 export const STUDENT_LOGIN = 'STUDENT_LOGIN';
 export const TUTOR_LOGIN = 'TUTOR_LOGIN';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';

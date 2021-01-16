@@ -1,10 +1,43 @@
-import { REGISTER_FAIL, LOGIN_SUCCESS, LOGIN_FAIL } from './types';
+import {
+  REGISTER_FAIL,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  USER_LOADED,
+  AUTH_ERROR,
+  LOG_OUT,
+} from './types';
 import { setAlert } from './alert';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import setAuthToken from '../utils/setAuthToken';
 
 const BASE_URL = 'http://localhost:5000/api';
+
+//Load User
+
+export const loadUser = (token, people) => async (dispatch) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+  const body = JSON.stringify({
+    token,
+    people,
+  });
+  console.log(body);
+  try {
+    const res = await axios.post(`${BASE_URL}/auth`, body, config);
+    dispatch({
+      type: USER_LOADED,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: AUTH_ERROR,
+    });
+  }
+};
 
 //Student Register
 
@@ -74,6 +107,9 @@ export const studentLogin = ({ email, password }) => async (dispatch) => {
       payload: res.data.data,
     });
     dispatch(setAlert(res.data.message, 'success'));
+    Cookies.set('Token', res.data.data.token, { expires: 2 });
+    Cookies.set('people', 'student');
+
     window.location.replace('/update-profile/student');
     // dispatch(loadUser());
   } catch (err) {
@@ -105,6 +141,8 @@ export const tutorLogin = ({ email, password }) => async (dispatch) => {
       payload: res.data.data,
     });
     dispatch(setAlert(res.data.message, 'success'));
+    Cookies.set('Token', res.data.data.token, { expires: 2 });
+    Cookies.set('people', 'tutor');
     window.location.replace('/update-profile/tutor');
     // dispatch(loadUser());
   } catch (err) {
@@ -160,4 +198,10 @@ export const tutorRegister = ({
       type: REGISTER_FAIL,
     });
   }
+};
+
+export const logout = () => (dispatch) => {
+  Cookies.remove('Token');
+  Cookies.remove('people');
+  dispatch({ type: LOG_OUT });
 };
