@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import './TutorUpdateProfile.css';
 import ProfileImage from './ProfileImage';
@@ -6,12 +6,31 @@ import SSC from './SSC';
 import HSC from './HSC';
 import Graduation from './Graduation';
 import Master from './Master';
+import { useDispatch } from 'react-redux';
+import {
+  getSSCLevel,
+  getHSCLevel,
+  getBoardName,
+  getGroupName,
+  getUniversityName,
+  getPassingYears,
+} from '../../actions/education';
+
 const TutorUpdateProfile = () => {
   const { handleSubmit } = useForm();
-
+  const dispatch = useDispatch();
   const onSubmit = (data) => {
     console.log(data);
   };
+
+  useEffect(() => {
+    dispatch(getSSCLevel());
+    dispatch(getHSCLevel());
+    dispatch(getBoardName());
+    dispatch(getGroupName());
+    dispatch(getUniversityName());
+    dispatch(getPassingYears());
+  }, [dispatch]);
 
   return (
     <div className="auth-wrapper">

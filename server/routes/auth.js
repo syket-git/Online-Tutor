@@ -97,7 +97,7 @@ router.post('/student/login', async (req, res) => {
     if (!validPass) return res.status(400).json('Invalid email or password');
 
     const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-    res.header('auth-token', token).send({
+    res.header('token', token).send({
       success: true,
       message: 'Login successfully done',
       data: {
@@ -126,7 +126,7 @@ router.post('/tutor/login', async (req, res) => {
     if (!validPass) return res.status(400).json('Invalid email or password');
 
     const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-    res.header('auth-token', token).send({
+    res.header('token', token).send({
       success: true,
       message: 'Login successfully done',
       data: {

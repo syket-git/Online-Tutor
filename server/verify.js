@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 function verify(req, res, next) {
-  const token = req.header('auth-token');
+  const token = req.header('token');
 
   if (!token) return res.status(400).json('Access Denied');
   try {

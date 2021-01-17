@@ -10,6 +10,7 @@ const SSCLevelSchema = require('../models/education/ssc');
 const HSCLevelSchema = require('../models/education/hsc');
 const BoardSchema = require('../models/education/board');
 const GroupSchema = require('../models/education/group');
+const YearSchema = require('../models/education/years');
 const UniversitySchema = require('../models/education/university');
 const verify = require('../verify');
 
@@ -155,6 +156,16 @@ router.get('/university', verify, async (req, res) => {
   try {
     const allUniversity = await UniversitySchema.find();
     res.send(allUniversity);
+  } catch (error) {
+    return res.json({ message: error?.message });
+  }
+});
+
+//Year
+router.get('/years', verify, async (req, res) => {
+  try {
+    const allYears = await YearSchema.find();
+    res.send(allYears);
   } catch (error) {
     return res.json({ message: error?.message });
   }

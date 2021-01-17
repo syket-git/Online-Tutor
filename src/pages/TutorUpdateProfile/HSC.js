@@ -1,6 +1,8 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 const HSC = () => {
+  const { hsc, board, group, years } = useSelector((state) => state.education);
   return (
     <div>
       <div className="row row-space">
@@ -17,9 +19,10 @@ const HSC = () => {
               <div className="col-md-6">
                 <select className="input--style-4 select" name="" id="">
                   <option value="">Select one</option>
-                  <option value="">SSC</option>
-                  <option value="">Dhakil</option>
-                  <option value="">SSC Vocational</option>
+                  {hsc?.length > 0 &&
+                    hsc.map((hc) => (
+                      <option key={hc._id}>{hc.hsc_level}</option>
+                    ))}
                 </select>
               </div>
             </div>
@@ -30,9 +33,10 @@ const HSC = () => {
               <div className="col-md-6">
                 <select className="input--style-4 select" name="" id="">
                   <option value="">Select one</option>
-                  <option value="">Chittagong</option>
-                  <option value="">Dhaka</option>
-                  <option value="">Rajshahi</option>
+                  {board?.length > 0 &&
+                    board.map((bd) => (
+                      <option key={bd._id}>{bd.board_name}</option>
+                    ))}
                 </select>
               </div>
             </div>
@@ -43,9 +47,10 @@ const HSC = () => {
               <div className="col-md-6">
                 <select className="input--style-4 select" name="" id="">
                   <option value="">Select one</option>
-                  <option value="">Chittagong</option>
-                  <option value="">Dhaka</option>
-                  <option value="">Rajshahi</option>
+                  {group?.length > 0 &&
+                    group.map((gp) => (
+                      <option key={gp._id}>{gp.group_name}</option>
+                    ))}
                 </select>
               </div>
             </div>
@@ -56,9 +61,10 @@ const HSC = () => {
               <div className="col-md-6">
                 <select className="input--style-4 select" name="" id="">
                   <option value="">Select one</option>
-                  <option value="">Chittagong</option>
-                  <option value="">Dhaka</option>
-                  <option value="">Rajshahi</option>
+                  {years?.length > 0 &&
+                    years.map((yr) => (
+                      <option key={yr._id}>{yr.passing_year}</option>
+                    ))}
                 </select>
               </div>
             </div>
