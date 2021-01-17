@@ -1,51 +1,100 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
+const path = require('path');
 const verify = require('../verify');
-const {
-  tutorUpdateProfile,
-} = require('../models/UpdateProfile/TutorUpdateProfile');
+const tutorUpdateProfile = require('../models/UpdateProfile/TutorUpdateProfile');
 
-router.put('/tutor', verify, async (req, res) => {
+//Set Storage Engine
+const storage = multer.diskStorage({
+  destination: './public/uploads',
+  filename: (req, file, cb) => {
+    return cb(
+      null,
+      file.fieldname + '-' + Date.now() + path.extname(file.originalname)
+    );
+  },
+});
+
+//Init Upload
+const upload = multer({
+  storage: storage,
+}).single('image');
+
+router.put('/tutor', upload, verify, async (req, res) => {
   try {
-    const TutorProfileUpdate = new tutorUpdateProfile({
-      userId: req.body.userId,
-      email: req.body.email,
-      ssc: {
-        examination: req.body.sscExamination,
-        board: req.body.sscBoard,
-        group: req.body.sscGroup,
-        passingYear: req.body.sscPassingYear,
-        result: req.body.sscResult,
-      },
-      hsc: {
-        examination: req.body.hscExamination,
-        board: req.body.hscBoard,
-        group: req.body.hscGroup,
-        passingYear: req.body.hscPassingYear,
-        result: req.body.hscResult,
-      },
-      graduation: {
-        degree: req.body.graduationDegree,
-        subject: req.body.graduationSubject,
-        board: req.body.graduationBoard,
-        passingYear: req.body.graduationPassingYear,
-        result: req.body.graduationResult,
-      },
-      master: {
-        degree: req.body.masterDegree,
-        subject: req.body.masterSubject,
-        board: req.body.masterBoard,
-        passingYear: req.body.masterPassingYear,
-        result: req.body.masterResult,
-      },
-      speciality: req.body.speciality,
-      presentAddress: req.body.presentAddress,
-      permanentAddress: req.body.permanentAddress,
+    const {
+      userId,
+      email,
+      sscExamination,
+      sscBoard,
+      sscPassingYear,
+      sscResult,
+      hscExamination,
+      hscBoard,
+      hscPassingYear,
+      hscResult,
+      graduationDegree,
+      graduationSubject,
+      graduationBoard,
+      graduationPassingYear,
+      graduationResult,
+      masterDegree,
+      masterSubject,
+      masterBoard,
+      masterPassingYear,
+      masterResult,
+      speciality,
+      presentAddress,
+      permanentAddress,
+    } = req.body;
+
+    let profileFields = {};
+    profileFields.userId = userId;
+    profileFields.email = email;
+    profileFields.ssc = {};
+    if (sscExamination) profileFields.ssc.examination = sscExamination;
+    if (sscBoard) profileFields.ssc.board = sscBoard;
+    if (sscPassingYear) profileFields.ssc.passingYear = sscPassingYear;
+    if (sscResult) profileFields.ssc.result = sscResult;
+    profileFields.hsc = {};
+    if (hscExamination) profileFields.hsc.examination = hscExamination;
+    if (hscBoard) profileFields.hsc.board = hscBoard;
+    if (hscPassingYear) profileFields.hsc.passingYear = hscPassingYear;
+    if (hscResult) profileFields.hsc.result = hscResult;
+    profileFields.graduation = {};
+    if (graduationDegree) profileFields.graduation.degree = graduationDegree;
+    if (graduationSubject) profileFields.graduation.subject = graduationSubject;
+    if (graduationBoard) profileFields.graduation.board = graduationBoard;
+    if (graduationPassingYear)
+      profileFields.graduation.passingYear = graduationPassingYear;
+    if (graduationResult) profileFields.graduation.result = graduationResult;
+    profileFields.master = {};
+    if (masterDegree) profileFields.master.degree = masterDegree;
+    if (masterSubject) profileFields.master.subject = masterSubject;
+    if (masterBoard) profileFields.master.board = masterBoard;
+    if (masterPassingYear) profileFields.master.passingYear = masterPassingYear;
+    if (masterResult) profileFields.master.result = masterResult;
+    if (speciality) profileFields.speciality = speciality;
+    if (presentAddress) profileFields.presentAddress = presentAddress;
+    if (permanentAddress) profileFields.permanentAddress = permanentAddress;
+    if (req.file) profileFields.imageUrl = req.file.filename;
+
+    let tutorProfile = await tutorUpdateProfile.findOne({
+      userId: userId.toString(),
     });
+    if (tutorProfile) {
+      tutorProfile = await tutorUpdateProfile.findOneAndUpdate(
+        { userId: userId },
+        { $set: profileFields },
+        { new: true }
+      );
+      return res.send(tutorProfile);
+    }
 
-    await TutorProfileUpdate.save();
-
-    res.json({ status: true, message: 'Profile update successfully done' });
+    const TutorProfileUpdate = new tutorUpdateProfile(profileFields);
+    const saveUpdateProfile = await TutorProfileUpdate.save();
+    res.send(saveUpdateProfile);
   } catch (err) {
     res.status(400).json({ message: err?.message });
   }

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const TutorUpdateProfile = mongoose.Schema({
+const tutorUpdateProfile = mongoose.Schema({
   userId: {
     type: String,
   },
@@ -17,7 +17,7 @@ const TutorUpdateProfile = mongoose.Schema({
       type: String,
     },
     passingYear: {
-      type: Number,
+      type: String,
     },
     result: {
       type: String,
@@ -34,7 +34,7 @@ const TutorUpdateProfile = mongoose.Schema({
       type: String,
     },
     passingYear: {
-      type: Number,
+      type: String,
     },
     result: {
       type: String,
@@ -51,7 +51,7 @@ const TutorUpdateProfile = mongoose.Schema({
       type: String,
     },
     passingYear: {
-      type: Number,
+      type: String,
     },
     result: {
       type: String,
@@ -68,7 +68,7 @@ const TutorUpdateProfile = mongoose.Schema({
       type: String,
     },
     passingYear: {
-      type: Number,
+      type: String,
     },
     result: {
       type: String,
@@ -89,4 +89,4 @@ const TutorUpdateProfile = mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('tutorUpdateProfile', TutorUpdateProfile);
+module.exports = mongoose.model('tutorUpdateProfile', tutorUpdateProfile);
