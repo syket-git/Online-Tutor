@@ -14,6 +14,8 @@ import {
   getGroupName,
   getUniversityName,
   getPassingYears,
+  getGraduationDegree,
+  getMasterDegree,
 } from '../../actions/education';
 
 const TutorUpdateProfile = () => {
@@ -30,6 +32,8 @@ const TutorUpdateProfile = () => {
     dispatch(getGroupName());
     dispatch(getUniversityName());
     dispatch(getPassingYears());
+    dispatch(getGraduationDegree());
+    dispatch(getMasterDegree());
   }, [dispatch]);
 
   return (

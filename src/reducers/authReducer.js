@@ -6,9 +6,12 @@ import {
   LOG_OUT,
   USER_LOADED,
 } from '../actions/types';
+import Cookies from 'js-cookie';
+
+const AuthToken = Cookies.get('Token');
 
 const initialState = {
-  token: null,
+  token: AuthToken !== undefined ? AuthToken : null,
   isAuthenticated: false,
   loading: true,
   user: null,

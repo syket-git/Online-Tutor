@@ -12,6 +12,8 @@ const BoardSchema = require('../models/education/board');
 const GroupSchema = require('../models/education/group');
 const YearSchema = require('../models/education/years');
 const UniversitySchema = require('../models/education/university');
+const MasterSchema = require('../models/education/master');
+const GraduationSchema = require('../models/education/graduation');
 const verify = require('../verify');
 
 const router = express.Router();
@@ -166,6 +168,26 @@ router.get('/years', verify, async (req, res) => {
   try {
     const allYears = await YearSchema.find();
     res.send(allYears);
+  } catch (error) {
+    return res.json({ message: error?.message });
+  }
+});
+
+//Graduation
+router.get('/graduation-degree', verify, async (req, res) => {
+  try {
+    const graduation = await GraduationSchema.find();
+    res.send(graduation);
+  } catch (error) {
+    return res.json({ message: error?.message });
+  }
+});
+
+//Master
+router.get('/master-degree', verify, async (req, res) => {
+  try {
+    const master = await MasterSchema.find();
+    res.send(master);
   } catch (error) {
     return res.json({ message: error?.message });
   }

@@ -5,7 +5,6 @@ const TutorRegister = require('../models/auth/TutorRegister');
 const { signupValidation, signinValidation } = require('../validation');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const verify = require('../verify');
 
 router.post('/', async (req, res) => {
   try {

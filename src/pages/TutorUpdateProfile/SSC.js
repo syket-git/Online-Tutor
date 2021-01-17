@@ -75,9 +75,11 @@ const SSC = () => {
               </div>
               <div className="col-md-6">
                 <input
+                  style={{ paddingLeft: '27px' }}
                   className="input--style-4 result"
                   name="result"
                   type="text"
+                  placeholder="Result"
                 />
               </div>
             </div>

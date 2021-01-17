@@ -5,6 +5,8 @@ import {
   GROUP_NAME,
   UNIVERSITY_NAME,
   PASSING_YEARS,
+  GRADUATION_DEGREE,
+  MASTER_DEGREE,
 } from '../actions/types';
 
 const initialState = {
@@ -15,6 +17,8 @@ const initialState = {
   university: null,
   board: null,
   years: null,
+  graduation: null,
+  master: null,
 };
 
 export const educationReducer = (state = initialState, action) => {
@@ -58,6 +62,18 @@ export const educationReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         years: payload,
+      };
+    case GRADUATION_DEGREE:
+      return {
+        ...state,
+        loading: false,
+        graduation: payload,
+      };
+    case MASTER_DEGREE:
+      return {
+        ...state,
+        loading: false,
+        master: payload,
       };
 
     default:

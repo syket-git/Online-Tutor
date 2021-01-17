@@ -5,6 +5,8 @@ import {
   GROUP_NAME,
   UNIVERSITY_NAME,
   PASSING_YEARS,
+  GRADUATION_DEGREE,
+  MASTER_DEGREE,
 } from './types';
 import { setAlert } from './alert';
 import axios from 'axios';
@@ -139,6 +141,55 @@ export const getPassingYears = () => async (dispatch) => {
 
     dispatch({
       type: PASSING_YEARS,
+      payload: res.data,
+    });
+  } catch (err) {
+    const errors = err?.response?.data;
+    if (errors) {
+      dispatch(setAlert(errors, 'danger'));
+    }
+  }
+};
+
+//GRADUATION DEGREE
+export const getGraduationDegree = () => async (dispatch) => {
+  const token = Cookies.get('Token');
+  const config = {
+    headers: {
+      token: token,
+    },
+  };
+  try {
+    const res = await axios.get(
+      `${BASE_URL}/education/graduation-degree`,
+      config
+    );
+
+    dispatch({
+      type: GRADUATION_DEGREE,
+      payload: res.data,
+    });
+  } catch (err) {
+    const errors = err?.response?.data;
+    if (errors) {
+      dispatch(setAlert(errors, 'danger'));
+    }
+  }
+};
+
+//MASTER DEGREE
+export const getMasterDegree = () => async (dispatch) => {
+  const token = Cookies.get('Token');
+  const config = {
+    headers: {
+      token: token,
+    },
+  };
+  try {
+    const res = await axios.get(`${BASE_URL}/education/master-degree`, config);
+
+    dispatch({
+      type: MASTER_DEGREE,
       payload: res.data,
     });
   } catch (err) {
