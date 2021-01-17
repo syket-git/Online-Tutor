@@ -4,11 +4,12 @@ import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Spinner from '../Spinner/Spinner';
 import { logout } from '../../actions/auth';
 
 const Navigation = ({ logout }) => {
   const auth = useSelector((state) => state.auth);
-  const { isAuthenticated } = auth;
+  const { isAuthenticated, loading } = auth;
   return (
     <div>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
