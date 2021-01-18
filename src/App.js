@@ -8,7 +8,6 @@ function App() {
 
   const token = Cookies.get('Token');
   const people = Cookies.get('people');
-  console.log(token, people);
 
   useEffect(() => {
     if (token && people) {

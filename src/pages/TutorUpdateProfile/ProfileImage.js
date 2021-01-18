@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import profile from '../../images/ProfileImage.png';
 import EditIcon from '@material-ui/icons/Edit';
 
-const ProfileImage = () => {
-  const [image, setImage] = useState('');
+const ProfileImage = ({ register, image, setImage }) => {
   return (
     <div>
       <div className="row row-space">
         <div className="update__profile-image-wrapper">
           <div className="profile__image">
-            <img src={profile} alt="Profile" />
+            <img
+              ref={register}
+              src={image === null ? profile : URL.createObjectURL(image)}
+              alt="Profile"
+              name="imageUrl"
+            />
 
             <div className="edit-box">
               <label htmlFor="image">

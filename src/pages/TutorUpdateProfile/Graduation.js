@@ -1,7 +1,19 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-const Graduation = () => {
+const Graduation = ({
+  register,
+  graduationDegree,
+  setGraduationDegree,
+  graduationSubject,
+  setGraduationSubject,
+  graduationBoard,
+  setGraduationBoard,
+  graduationPassingYear,
+  setGraduationPassingYear,
+  graduationResult,
+  setGraduationResult,
+}) => {
   const { board, years, graduation } = useSelector((state) => state.education);
   return (
     <div>
@@ -14,11 +26,20 @@ const Graduation = () => {
                 <label className="label">Degree</label>
               </div>
               <div className="col-md-6">
-                <select className="input--style-4 select" name="" id="">
+                <select
+                  ref={register}
+                  value={graduationDegree}
+                  onChange={(e) => setGraduationDegree(e.target.value)}
+                  className="input--style-4 select"
+                  name="graduationDegree"
+                  id=""
+                >
                   <option value="">Select one</option>
                   {graduation?.length > 0 &&
                     graduation.map((gd) => (
-                      <option key={gd._id}>{gd.graduation_degree}</option>
+                      <option value={gd.graduation_degree} key={gd._id}>
+                        {gd.graduation_degree}
+                      </option>
                     ))}
                 </select>
               </div>
@@ -29,9 +50,12 @@ const Graduation = () => {
               </div>
               <div className="col-md-6">
                 <input
+                  ref={register}
+                  value={graduationSubject}
+                  onChange={(e) => setGraduationSubject(e.target.value)}
                   style={{ paddingLeft: '27px' }}
                   className="input--style-4 result"
-                  name="subject"
+                  name="graduationSubject"
                   type="text"
                   placeholder="Subject"
                 />
@@ -42,11 +66,20 @@ const Graduation = () => {
                 <label className="label">Board</label>
               </div>
               <div className="col-md-6">
-                <select className="input--style-4 select" name="" id="">
+                <select
+                  ref={register}
+                  value={graduationBoard}
+                  onChange={(e) => setGraduationBoard(e.target.value)}
+                  className="input--style-4 select"
+                  name="graduationBoard"
+                  id=""
+                >
                   <option value="">Select one</option>
                   {board?.length > 0 &&
                     board.map((bd) => (
-                      <option key={bd._id}>{bd.board_name}</option>
+                      <option value={bd.board_name} key={bd._id}>
+                        {bd.board_name}
+                      </option>
                     ))}
                 </select>
               </div>
@@ -57,11 +90,20 @@ const Graduation = () => {
                 <label className="label">Passing Year</label>
               </div>
               <div className="col-md-6">
-                <select className="input--style-4 select" name="" id="">
+                <select
+                  ref={register}
+                  value={graduationPassingYear}
+                  onChange={(e) => setGraduationPassingYear(e.target.value)}
+                  className="input--style-4 select"
+                  name="graduationPassingYear"
+                  id=""
+                >
                   <option value="">Select one</option>
                   {years?.length > 0 &&
                     years.map((yr) => (
-                      <option key={yr._id}>{yr.passing_year}</option>
+                      <option value={yr.passing_year} key={yr._id}>
+                        {yr.passing_year}
+                      </option>
                     ))}
                 </select>
               </div>
@@ -72,9 +114,12 @@ const Graduation = () => {
               </div>
               <div className="col-md-6">
                 <input
+                  ref={register}
+                  value={graduationResult}
+                  onChange={(e) => setGraduationResult(e.target.value)}
                   style={{ paddingLeft: '27px' }}
                   className="input--style-4 result"
-                  name="result"
+                  name="graduationResult"
                   type="text"
                   placeholder="Result"
                 />

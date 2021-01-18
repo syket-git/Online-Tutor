@@ -25,7 +25,7 @@ export const loadUser = (token, people) => async (dispatch) => {
     token,
     people,
   });
-  console.log(body);
+
   try {
     const res = await axios.post(`${BASE_URL}/auth`, body, config);
     dispatch({

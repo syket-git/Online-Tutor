@@ -1,7 +1,19 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-const Master = () => {
+const Master = ({
+  register,
+  masterDegree,
+  setMasterDegree,
+  masterSubject,
+  setMasterSubject,
+  masterBoard,
+  setMasterBoard,
+  masterPassingYear,
+  setMasterPassingYear,
+  masterResult,
+  setMasterResult,
+}) => {
   const { board, years, master } = useSelector((state) => state.education);
   return (
     <div>
@@ -14,11 +26,20 @@ const Master = () => {
                 <label className="label">Degree</label>
               </div>
               <div className="col-md-6">
-                <select className="input--style-4 select" name="" id="">
+                <select
+                  ref={register}
+                  value={masterDegree}
+                  onChange={(e) => setMasterDegree(e.target.value)}
+                  className="input--style-4 select"
+                  name="masterDegree"
+                  id=""
+                >
                   <option value="">Select one</option>
                   {master?.length > 0 &&
                     master.map((mt) => (
-                      <option key={mt._id}>{mt.master_degree}</option>
+                      <option value={mt.master_degree} key={mt._id}>
+                        {mt.master_degree}
+                      </option>
                     ))}
                 </select>
               </div>
@@ -29,9 +50,12 @@ const Master = () => {
               </div>
               <div className="col-md-6">
                 <input
+                  ref={register}
+                  value={masterSubject}
+                  onChange={(e) => setMasterSubject(e.target.value)}
                   style={{ paddingLeft: '27px' }}
                   className="input--style-4 result"
-                  name="subject"
+                  name="masterSubject"
                   type="text"
                   placeholder="Subject"
                 />
@@ -42,11 +66,20 @@ const Master = () => {
                 <label className="label">Board</label>
               </div>
               <div className="col-md-6">
-                <select className="input--style-4 select" name="" id="">
+                <select
+                  ref={register}
+                  value={masterBoard}
+                  onChange={(e) => setMasterBoard(e.target.value)}
+                  className="input--style-4 select"
+                  name="masterBoard"
+                  id=""
+                >
                   <option value="">Select one</option>
                   {board?.length > 0 &&
                     board.map((bd) => (
-                      <option key={bd._id}>{bd.board_name}</option>
+                      <option value={bd.board_name} key={bd._id}>
+                        {bd.board_name}
+                      </option>
                     ))}
                 </select>
               </div>
@@ -57,11 +90,20 @@ const Master = () => {
                 <label className="label">Passing Year</label>
               </div>
               <div className="col-md-6">
-                <select className="input--style-4 select" name="" id="">
+                <select
+                  ref={register}
+                  value={masterPassingYear}
+                  onChange={(e) => setMasterPassingYear(e.target.value)}
+                  className="input--style-4 select"
+                  name="masterPassingYear"
+                  id=""
+                >
                   <option value="">Select one</option>
                   {years?.length > 0 &&
                     years.map((yr) => (
-                      <option key={yr._id}>{yr.passing_year}</option>
+                      <option value={yr.passing_year} key={yr._id}>
+                        {yr.passing_year}
+                      </option>
                     ))}
                 </select>
               </div>
@@ -72,9 +114,12 @@ const Master = () => {
               </div>
               <div className="col-md-6">
                 <input
+                  ref={register}
+                  value={masterResult}
+                  onChange={(e) => setMasterResult(e.target.value)}
                   style={{ paddingLeft: '27px' }}
                   className="input--style-4 result"
-                  name="result"
+                  name="masterResult"
                   type="text"
                   placeholder="Result"
                 />

@@ -1,7 +1,19 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-const SSC = () => {
+const SSC = ({
+  register,
+  sscExamination,
+  setSscExamination,
+  sscBoard,
+  setSscBoard,
+  sscGroup,
+  setSscGroup,
+  sscPassingYear,
+  setSscPassingYear,
+  sscResult,
+  setSscResult,
+}) => {
   const { ssc, board, group, years } = useSelector((state) => state.education);
 
   return (
@@ -18,11 +30,20 @@ const SSC = () => {
                 <label className="label">Examination</label>
               </div>
               <div className="col-md-6">
-                <select className="input--style-4 select" name="" id="">
+                <select
+                  ref={register}
+                  value={sscExamination}
+                  onChange={(e) => setSscExamination(e.target.value)}
+                  className="input--style-4 select"
+                  name="sscExamination"
+                  id=""
+                >
                   <option value="">Select one</option>
                   {ssc?.length > 0 &&
                     ssc.map((sc) => (
-                      <option key={sc._id}>{sc.ssc_level}</option>
+                      <option value={sc.ssc_level} key={sc._id}>
+                        {sc.ssc_level}
+                      </option>
                     ))}
                 </select>
               </div>
@@ -32,11 +53,20 @@ const SSC = () => {
                 <label className="label">Board</label>
               </div>
               <div className="col-md-6">
-                <select className="input--style-4 select" name="" id="">
+                <select
+                  ref={register}
+                  value={sscBoard}
+                  onChange={(e) => setSscBoard(e.target.value)}
+                  className="input--style-4 select"
+                  name="sscBoard"
+                  id=""
+                >
                   <option value="">Select one</option>
                   {board?.length > 0 &&
                     board.map((bd) => (
-                      <option key={bd._id}>{bd.board_name}</option>
+                      <option value={bd.board_name} key={bd._id}>
+                        {bd.board_name}
+                      </option>
                     ))}
                 </select>
               </div>
@@ -46,11 +76,20 @@ const SSC = () => {
                 <label className="label">Group</label>
               </div>
               <div className="col-md-6">
-                <select className="input--style-4 select" name="" id="">
+                <select
+                  ref={register}
+                  value={sscGroup}
+                  onChange={(e) => setSscGroup(e.target.value)}
+                  className="input--style-4 select"
+                  name="sscGroup"
+                  id=""
+                >
                   <option value="">Select one</option>
                   {group?.length > 0 &&
                     group.map((gp) => (
-                      <option key={gp._id}>{gp.group_name}</option>
+                      <option value={gp.group_name} key={gp._id}>
+                        {gp.group_name}
+                      </option>
                     ))}
                 </select>
               </div>
@@ -60,11 +99,20 @@ const SSC = () => {
                 <label className="label">Passing Year</label>
               </div>
               <div className="col-md-6">
-                <select className="input--style-4 select" name="" id="">
+                <select
+                  ref={register}
+                  value={sscPassingYear}
+                  onChange={(e) => setSscPassingYear(e.target.value)}
+                  className="input--style-4 select"
+                  name="sscPassingYear"
+                  id=""
+                >
                   <option value="">Select one</option>
                   {years?.length > 0 &&
                     years.map((yr) => (
-                      <option key={yr._id}>{yr.passing_year}</option>
+                      <option value={yr.passing_year} key={yr._id}>
+                        {yr.passing_year}
+                      </option>
                     ))}
                 </select>
               </div>
@@ -75,9 +123,12 @@ const SSC = () => {
               </div>
               <div className="col-md-6">
                 <input
+                  ref={register}
+                  value={sscResult}
+                  onChange={(e) => setSscResult(e.target.value)}
                   style={{ paddingLeft: '27px' }}
                   className="input--style-4 result"
-                  name="result"
+                  name="sscResult"
                   type="text"
                   placeholder="Result"
                 />
