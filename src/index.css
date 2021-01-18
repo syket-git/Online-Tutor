@@ -12,6 +12,9 @@ color 4 : #45A29E
 
 
 */
+* {
+  scroll-behavior: smooth !important;
+}
 
 :root {
   --primary-color: #17a2b8;

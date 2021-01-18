@@ -84,7 +84,7 @@ const tutorUpdateProfile = mongoose.Schema({
   permanentAddress: {
     type: String,
   },
-  imageUrl: {
+  image: {
     type: String,
   },
 });

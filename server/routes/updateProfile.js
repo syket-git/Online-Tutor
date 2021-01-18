@@ -78,7 +78,7 @@ router.put('/tutor', upload, verify, async (req, res) => {
     if (speciality) profileFields.speciality = speciality;
     if (presentAddress) profileFields.presentAddress = presentAddress;
     if (permanentAddress) profileFields.permanentAddress = permanentAddress;
-    if (req.file) profileFields.imageUrl = req.file.filename;
+    if (req.file) profileFields.image = req.file.filename;
 
     let tutorProfile = await tutorUpdateProfile.findOne({
       userId: userId.toString(),
@@ -89,12 +89,18 @@ router.put('/tutor', upload, verify, async (req, res) => {
         { $set: profileFields },
         { new: true }
       );
-      return res.send(tutorProfile);
+      return res.json({
+        status: true,
+        message: 'Profile updated successfully done',
+      });
     }
 
     const TutorProfileUpdate = new tutorUpdateProfile(profileFields);
-    const saveUpdateProfile = await TutorProfileUpdate.save();
-    res.send(saveUpdateProfile);
+    await TutorProfileUpdate.save();
+    res.json({
+      status: true,
+      message: 'Profile updated successfully done',
+    });
   } catch (err) {
     res.status(400).json({ message: err?.message });
   }

@@ -7,6 +7,8 @@ import HSC from './HSC';
 import Graduation from './Graduation';
 import Master from './Master';
 import { useDispatch } from 'react-redux';
+import { tutorUpdateProfile } from '../../actions/profile';
+import { useSelector } from 'react-redux';
 import {
   getSSCLevel,
   getHSCLevel,
@@ -20,7 +22,8 @@ import {
 
 const TutorUpdateProfile = () => {
   const { register, handleSubmit } = useForm();
-
+  const { user } = useSelector((state) => state.auth);
+  console.log(user);
   // SSC
   const [sscExamination, setSscExamination] = useState('');
   const [sscBoard, setSscBoard] = useState('');
@@ -54,8 +57,11 @@ const TutorUpdateProfile = () => {
 
   const dispatch = useDispatch();
   const onSubmit = (data) => {
-    data.imageUrl = image;
-    console.log(data);
+    data.userId = user?._id;
+    data.email = user?.email;
+    data.image = image;
+    dispatch(tutorUpdateProfile(data));
+    window.scrollTo(0, 0);
   };
 
   useEffect(() => {
