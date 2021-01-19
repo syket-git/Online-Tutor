@@ -12,7 +12,6 @@ const ProfileImage = ({ register, image, setImage }) => {
               ref={register}
               src={image === null ? profile : URL.createObjectURL(image)}
               alt="Profile"
-              name="imageUrl"
             />
 
             <div className="edit-box">

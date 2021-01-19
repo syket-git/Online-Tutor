@@ -89,3 +89,49 @@ export const tutorUpdateProfile = ({
     }
   }
 };
+
+//Student Update Profile
+
+export const studentUpdateProfile = ({
+  userId,
+  email,
+  className,
+  presentAddress,
+  permanentAddress,
+  image,
+}) => async (dispatch) => {
+  console.log(image);
+  const token = Cookies.get('Token');
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      token: token,
+    },
+  };
+  const formData = new FormData();
+  formData.append('userId', userId);
+  formData.append('email', email);
+  formData.append('image', image);
+  formData.append('className', className);
+  formData.append('presentAddress', presentAddress);
+  formData.append('permanentAddress', permanentAddress);
+  const body = formData;
+
+  try {
+    const res = await axios.put(
+      `${BASE_URL}/update-profile/student`,
+      body,
+      config
+    );
+
+    console.log(res.data);
+
+    dispatch(setAlert(res.data.message, 'success'));
+    window.location.replace('/');
+  } catch (err) {
+    const errors = err?.response?.data?.message;
+    if (errors) {
+      dispatch(setAlert(errors, 'danger'));
+    }
+  }
+};
