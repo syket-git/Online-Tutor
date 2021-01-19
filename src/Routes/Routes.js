@@ -6,6 +6,7 @@ import Login from '../pages/Login/Login';
 import NotFound from '../pages/404/404';
 import TutorUpdateProfile from '../pages/TutorUpdateProfile/TutorUpdateProfile';
 import StudentUpdateProfile from '../pages/StudentUpdateProfile/StudentUpdateProfile';
+import Dashboard from '../pages/Dashboard/Dashboard';
 import Navbar from '../components/Navbar/Navbar';
 import Alert from '../components/Alert/Alert';
 
@@ -40,6 +41,9 @@ const Routes = () => {
           </Route>
           <Route exact path="/update-profile/student">
             <StudentUpdateProfile />
+          </Route>
+          <Route exact path="/dashboard">
+            <Dashboard />
           </Route>
           <Route path="*">
             <NotFound />

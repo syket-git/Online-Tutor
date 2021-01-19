@@ -19,6 +19,7 @@ const Navigation = ({ logout }) => {
           <Nav className="ml-auto">
             {isAuthenticated ? (
               <>
+                <Nav.Link href="/dashboard">Dashboard</Nav.Link>
                 <Nav.Link onClick={logout} href="/">
                   Logout
                 </Nav.Link>
