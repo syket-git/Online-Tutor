@@ -4,6 +4,7 @@ const multer = require('multer');
 const path = require('path');
 const verify = require('../verify');
 const tutorUpdateProfile = require('../models/UpdateProfile/TutorUpdateProfile');
+const studentUpdateProfile = require('../models/UpdateProfile/StudentUpdateProfile');
 
 //Set Storage Engine
 const storage = multer.diskStorage({
@@ -21,6 +22,7 @@ const upload = multer({
   storage: storage,
 }).single('image');
 
+//Tutor Update Profile
 router.put('/tutor', upload, verify, async (req, res) => {
   try {
     const {
@@ -97,6 +99,51 @@ router.put('/tutor', upload, verify, async (req, res) => {
 
     const TutorProfileUpdate = new tutorUpdateProfile(profileFields);
     await TutorProfileUpdate.save();
+    res.json({
+      status: true,
+      message: 'Profile updated successfully done',
+    });
+  } catch (err) {
+    res.status(400).json({ message: err?.message });
+  }
+});
+
+//Student Update Profile
+router.put('/student', upload, verify, async (req, res) => {
+  try {
+    const {
+      userId,
+      email,
+      className,
+      presentAddress,
+      permanentAddress,
+    } = req.body;
+
+    let profileFields = {};
+    profileFields.userId = userId;
+    profileFields.email = email;
+    if (className) profileFields.className = className;
+    if (presentAddress) profileFields.presentAddress = presentAddress;
+    if (permanentAddress) profileFields.permanentAddress = permanentAddress;
+    if (req.file) profileFields.image = req.file.filename;
+
+    let studentProfile = await studentUpdateProfile.findOne({
+      userId: userId.toString(),
+    });
+    if (studentProfile) {
+      studentProfile = await studentUpdateProfile.findOneAndUpdate(
+        { userId: userId },
+        { $set: profileFields },
+        { new: true }
+      );
+      return res.json({
+        status: true,
+        message: 'Profile updated successfully done',
+      });
+    }
+
+    const StudentProfileUpdate = new studentUpdateProfile(profileFields);
+    await StudentProfileUpdate.save();
     res.json({
       status: true,
       message: 'Profile updated successfully done',

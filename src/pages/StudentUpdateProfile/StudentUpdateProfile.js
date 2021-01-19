@@ -20,9 +20,8 @@ const StudentUpdateProfile = () => {
     data.userId = user?._id;
     data.email = user?.email;
     data.image = image;
-    console.log(data);
-    //dispatch(studentUpdateProfile(data));
-    //window.scrollTo(0, 0);
+    dispatch(studentUpdateProfile(data));
+    window.scrollTo(0, 0);
   };
 
   return (
